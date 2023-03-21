@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "main.h"
 /**
   * main - the main entry of the program
   *
