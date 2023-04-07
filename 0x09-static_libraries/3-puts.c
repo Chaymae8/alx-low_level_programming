@@ -3,16 +3,16 @@
 /**
 * _puts - a function that prints a string, followed by a new line, to stdout.
 *
-* @str: input.
+* @s: input.
 */
 
-void _puts(char *str)
+void _puts(char *s)
 {
 	int c = 0;
 
-	while (str[c] != ('\0'))
+	while (s[c] != ('\0'))
 	{
-		_putchar(str[c]);
+		_putchar(s[c]);
 		c++;
 	}
 	_putchar('\n');
