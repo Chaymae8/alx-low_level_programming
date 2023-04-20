@@ -1,39 +1,37 @@
 #include "3-calc.h"
+#include "function_pointers.h"
+#include <stdlib.h>
+#include <stdio.h>
 /**
  * main - a program that performs simple operations
- * @ac: number of arguments
- * @av: array of arguments
+ * @argc: number of arguments
+ * @argv: array of arguments
  * Return: Always 0 (Success)
  */
-int main(int ac, char *av[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	int a1, a2, result;
-	char op;
-	int (*func)(int, int);
+	int num1, num2;
+	char *op;
 
-		if (ac != 4)
-		{
-			printf("Error\n");
-			exit(98);
-		}
-	a1 = atoi(av[1]);
-	a2 = atoi(av[3]);
+	if (argc != 4)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	num1 = atoi(argv[1]);
+	op = argv[2];
+	num2 = atoi(argv[3]);
 
-	func = get_op_func(av[2]);
-
-	if (!func)
+	if (get_op_func(op) == NULL || op[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
-	op = *av[2];
-	if ((op == '/' || op == '%') && a1 == 0)
+	if ((*op == '/' && num2 == 0) || (*op == '%' && num2 == 0))
 	{
 		printf("Error\n");
 		exit(100);
 	}
-	result = func(a1, a2);
-
-	printf("%d\n", result);
+	printf("%d\n", get_op_func(op)(num1, num2));
 	return (0);
 }
