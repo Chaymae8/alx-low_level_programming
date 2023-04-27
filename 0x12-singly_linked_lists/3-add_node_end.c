@@ -1,5 +1,5 @@
 #include "lists.h"
-#include <stdlib.h>
+#include <string.h>
 /**
 * *add_node_end - adds a new node at the end of a list_t list
 * @head: double pointer to the list_t list
@@ -8,31 +8,40 @@
 */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new;
-	list_t *l = *head;
-	unsigned int len = 0;
+	list_t *n, *nov;
+	unsigned int c;
 
-	while (str[len])
-		len++;
-
-	new = malloc(sizeof(list_t));
-	if (!new)
-		return (NULL);
-
-	new->str = strdup(str);
-	new->len = len;
-	new->next = NULL;
-
+	c = 0;
 	if (*head == NULL)
 	{
-		*head = new;
-		return (new);
+		n = malloc(sizeof(list_t));
+		if (n == NULL)
+			return (NULL);
+		n->next = NULL;
+		*head = n;
+		n->str = strdup(str);
+		while (str[c] != '\0')
+			c++;
+		n->len = c;
 	}
-
-	while (l->next)
-		l = l->next;
-
-	l->next = new;
-
-	return (new);
+	else
+	{
+		nov = *head;
+		while (1)
+		{
+			if (nov->next == NULL)
+				break;
+			nov = nov->next;
+		}
+		n = malloc(sizeof(list_t));
+		if (n == NULL)
+			return (NULL);
+		n->next = NULL;
+		nov->next = n;
+		n->str = strdup(str);
+		while (str[c] != '\0')
+			c++;
+		n->len = c;
+	}
+	return (n);
 }
