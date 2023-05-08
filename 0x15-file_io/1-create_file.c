@@ -7,7 +7,7 @@
 */
 int create_file(const char *filename, char *text_content)
 {
-	int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	int fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	int letters = write(fd, text_content, strlen(text_content));
 
 	if (filename == NULL)
